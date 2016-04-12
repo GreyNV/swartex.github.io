@@ -23,11 +23,14 @@ $(document).ready(function(){
 
         // Тепер заставим двигатся змейку используя таймер который будет вызывать функцию рисующую змейку
         //каждые 60ms
+        var option_speed = document.getElementById("speed_shake");
+        var speed_shk = option_speed.options[option_speed.selectedIndex].value;
         if(typeof game_loop != "undefined") clearInterval(game_loop);
-        game_loop = setInterval(paint, 60);
+        game_loop = setInterval(paint, speed_shk);
     }
     init();
 
+    document.getElementById("start").onclick = start();
     function create_snake()
     {
         var length = 4; //Длинна змеи
@@ -72,6 +75,7 @@ $(document).ready(function(){
         //Теперь если голова змеи ударится об тело игра начнется заново
         if(nx == -1 || nx == w/cw || ny == -1 || ny == h/cw || check_collision(nx, ny, snake_array))
         {
+            //alert("Game Over!"); // сообщение о проиграше
             //restart игры
             init();
             return;
@@ -138,4 +142,13 @@ $(document).ready(function(){
         else if(key == "40" && d != "up") d = "down";
         //Теперь змея управляемая
     })
+
+    // функция рестарта игры!
+    document.getElementById('restart').onclick = function(){
+        init();
+    }
 })
+
+//function restart(){
+//    init();
+//}
