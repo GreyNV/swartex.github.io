@@ -30,8 +30,7 @@ $(document).ready(function(){
     }
     init();
 
-    document.getElementById("start").onclick = start();
-    function create_snake()
+        function create_snake()
     {
         var length = 4; //Длинна змеи
         snake_array = []; //Пустой массив для старта
