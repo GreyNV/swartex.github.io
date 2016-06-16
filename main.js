@@ -143,9 +143,7 @@ $(document).ready(function(){
     })
 
     // функция рестарта игры!
-    document.getElementById('restart').onclick = function(){
-        init();
-    }
+    document.getElementById('restart').onclick = init;
 })
 
 //function restart(){
