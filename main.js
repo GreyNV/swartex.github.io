@@ -9,7 +9,7 @@ $(document).ready(function(){
     var d;
     var food;
     var score;
-
+    var isPlayed = true;
     // Создаем змейку
     var snake_array; // Массив ячеек для создания змеи
 
@@ -52,85 +52,79 @@ $(document).ready(function(){
     }
 
     //Теперь рисуем змейку
-    function paint()
-    {
-        //Рисуем canvas
-        ctx.fillStyle = "white";
-        ctx.fillRect(0, 0, w, h);
-        ctx.strokeStyle = "black";
-        ctx.strokeRect(0, 0, w, h);
+    function paint() {
+        if (isPlayed) {
+            //Рисуем canvas
+            ctx.fillStyle = "white";
+            ctx.fillRect(0, 0, w, h);
+            ctx.strokeStyle = "black";
+            ctx.strokeRect(0, 0, w, h);
 
-        //Код отвечающий за движение змейки ниже.
-        //Очень просто
-        var nx = snake_array[0].x;
-        var ny = snake_array[0].y;
+            //Код отвечающий за движение змейки ниже.
+            //Очень просто
+            var nx = snake_array[0].x;
+            var ny = snake_array[0].y;
 
-        if(d == "right") nx++;
-        else if(d == "left") nx--;
-        else if(d == "up") ny--;
-        else if(d == "down") ny++;
+            if (d == "right") nx++;
+            else if (d == "left") nx--;
+            else if (d == "up") ny--;
+            else if (d == "down") ny++;
 
 
-        //Теперь если голова змеи ударится об тело игра начнется заново
-        if(nx == -1 || nx == w/cw || ny == -1 || ny == h/cw || check_collision(nx, ny, snake_array))
-        {
-            //alert("Game Over!"); // сообщение о проиграше
-            //restart игры
-            init();
-            return;
+            //Теперь если голова змеи ударится об тело игра начнется заново
+            if (nx == -1 || nx == w / cw || ny == -1 || ny == h / cw || check_collision(nx, ny, snake_array)) {
+                //alert("Game Over!"); // сообщение о проиграше
+                //restart игры
+                init();
+                return;
+            }
+
+            //Пишем код для прийома пищи змейкой :)
+
+            if (nx == food.x && ny == food.y) {
+                var tail = {x: nx, y: ny};
+                score++;
+                //Создаем новый кусочек
+                create_food();
+            }
+            else {
+                var tail = snake_array.pop(); //pops out the last cell
+                tail.x = nx;
+                tail.y = ny;
+            }
+            //Теперь змея может пообедать :)
+
+            snake_array.unshift(tail);
+
+            for (var i = 0; i < snake_array.length; i++) {
+                var c = snake_array[i];
+
+                paint_cell(c.x, c.y);
+            }
+
+            //Рисуем еду
+            paint_cell(food.x, food.y);
+            //Выводим счет
+            var score_text = "Счет: " + score;
+            ctx.fillText(score_text, 5, h - 5);
+        }
+    
+        //Красим змею в зеленый
+        function paint_cell(x, y) {
+            ctx.fillStyle = "#A4CA39";
+            ctx.fillRect(x * cw, y * cw, cw, cw);
+            ctx.strokeStyle = "white";
+            ctx.strokeRect(x * cw, y * cw, cw, cw);
         }
 
-        //Пишем код для прийома пищи змейкой :)
-
-        if(nx == food.x && ny == food.y)
-        {
-            var tail = {x: nx, y: ny};
-            score++;
-            //Создаем новый кусочек
-            create_food();
+        function check_collision(x, y, array) {
+            for (var i = 0; i < array.length; i++) {
+                if (array[i].x == x && array[i].y == y)
+                    return true;
+            }
+            return false;
         }
-        else
-        {
-            var tail = snake_array.pop(); //pops out the last cell
-            tail.x = nx; tail.y = ny;
-        }
-        //Теперь змея может пообедать :)
-
-        snake_array.unshift(tail);
-
-        for(var i = 0; i < snake_array.length; i++)
-        {
-            var c = snake_array[i];
-
-            paint_cell(c.x, c.y);
-        }
-
-        //Рисуем еду
-        paint_cell(food.x, food.y);
-        //Выводим счет
-        var score_text = "Счет: " + score;
-        ctx.fillText(score_text, 5, h-5);
     }
-
-    //Красим змею в зеленый
-    function paint_cell(x, y)
-    {
-        ctx.fillStyle = "#A4CA39";
-        ctx.fillRect(x*cw, y*cw, cw, cw);
-        ctx.strokeStyle = "white";
-        ctx.strokeRect(x*cw, y*cw, cw, cw);
-    }
-
-    function check_collision(x, y, array)
-    {
-        for(var i = 0; i < array.length; i++)
-        {
-            if(array[i].x == x && array[i].y == y)
-                return true;
-        }
-        return false;
-    }
-
     //самое важное управление голодной змеей :)
     $(document).keydown(function(e){
         var key = e.which;
@@ -144,8 +138,10 @@ $(document).ready(function(){
 
     // функция рестарта игры!
     document.getElementById('restart').onclick = init;
+    document.getElementById('play').onclick = function () {
+        isPlayed = true;
+    }
+    document.getElementById('pause').onclick = function () {
+        isPlayed = false;
+    }
 })
-
-//function restart(){
-//    init();
-//}
