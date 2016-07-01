@@ -1,0 +1,9 @@
+#scr {
+    width: 85px;
+    background: #fff;
+    border: 1px solid #2c509a;
+    border-radius: 5px;
+    color: #2c509a;
+    font: normal 12px arial;
+    padding: 7px 13px 8px
+}
