@@ -106,7 +106,9 @@ $(document).ready(function(){
             paint_cell(food.x, food.y);
             //Выводим счет
             var score_text = "Счет: " + score;
-            ctx.fillText(score_text, 5, h - 5);
+            // ctx.fillText(score_text, 5, h - 5);
+            //записываем счет в 
+            document.getElementById('scr').innerHTML = score_text;
         }
     
         //Красим змею в зеленый
