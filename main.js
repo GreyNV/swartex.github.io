@@ -9,6 +9,7 @@ $(document).ready(function(){
     var d;
     var food;
     var score;
+    /* флаг состояния игры  */
     var isPlayed = true;
     // Создаем змейку
     var snake_array; // Массив ячеек для создания змеи
@@ -23,10 +24,12 @@ $(document).ready(function(){
 
         // Тепер заставим двигатся змейку используя таймер который будет вызывать функцию рисующую змейку
         //каждые 60ms
-        var option_speed = document.getElementById("speed_shake");
-        var speed_shk = option_speed.options[option_speed.selectedIndex].value;
-        if(typeof game_loop != "undefined") clearInterval(game_loop);
-        game_loop = setInterval(paint, speed_shk);
+        var select_speed = document.getElementById("speed_shake");
+        var speed_shake = select_speed.options[select_speed.selectedIndex].value;
+        if(typeof game_loop != "undefined"){
+            clearInterval(game_loop);
+        }
+        game_loop = setInterval(paint, speed_shake);
     }
     init();
 
@@ -50,7 +53,6 @@ $(document).ready(function(){
         };
         //Будет создавать ячейку с x/y между 0-44
     }
-
     //Теперь рисуем змейку
     function paint() {
         if (isPlayed) {
@@ -118,7 +120,6 @@ $(document).ready(function(){
             ctx.strokeStyle = "white";
             ctx.strokeRect(x * cw, y * cw, cw, cw);
         }
-
         function check_collision(x, y, array) {
             for (var i = 0; i < array.length; i++) {
                 if (array[i].x == x && array[i].y == y)
