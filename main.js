@@ -9,6 +9,7 @@ $(document).ready(function(){
     var d;
     var food;
     var score;
+    var stone = 0; //New variable to store new currency
     /* флаг состояния игры  */
     var isPlayed = true;
     // Создаем змейку

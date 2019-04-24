@@ -70,6 +70,7 @@ body{
     color: #2c509a;
     font: normal 12px arial;
     padding: 7px 13px 8px
+}
 
     /*Не решил пока как оформить окно с результатом*/
 #score {
@@ -86,5 +87,4 @@ body{
     padding: 6px 20px;
     text-align: center;
     text-shadow: 0 -1px 0 #396715;
-}
 }
