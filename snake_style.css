@@ -71,7 +71,8 @@ body{
     font: normal 12px arial;
     padding: 7px 13px 8px
 
-    /*Не решил пока как оформить окно с результатом
+    /*Не решил пока как оформить окно с результатом*/
+#score {
     width: 150px;
     height: 20px;
     background-color: #68b12f;
@@ -84,5 +85,6 @@ body{
     font-weight: bold;
     padding: 6px 20px;
     text-align: center;
-    text-shadow: 0 -1px 0 #396715;*/
+    text-shadow: 0 -1px 0 #396715;
+}
 }
