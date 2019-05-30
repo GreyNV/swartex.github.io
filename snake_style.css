@@ -71,11 +71,20 @@ body{
     font: normal 12px arial;
     padding: 7px 13px 8px
 }
-
+#stn {
+    /*пока будет вот такой убогий дизайн )*/
+    width: 85px;
+    background: #fff;
+    border: 1px solid #2c509a;
+    border-radius: 5px;
+    color: #2c509a;
+    font: normal 12px arial;
+    padding: 7px 13px 8px
+}
     /*Не решил пока как оформить окно с результатом*/
 #score {
     width: 150px;
-    height: 20px;
+    height: 35px;
     background-color: #68b12f;
     background: linear-gradient(top, #68b12f, #50911e);
     border: 1px solid #509111;
@@ -87,4 +96,8 @@ body{
     padding: 6px 20px;
     text-align: center;
     text-shadow: 0 -1px 0 #396715;
+    align-self: center;
+    align-content: center;
+    margin-left: 40%;
+    padding-left: 55px
 }
