@@ -112,6 +112,8 @@ $(document).ready(function(){
             // ctx.fillText(score_text, 5, h - 5);
             //записываем счет в 
             document.getElementById('scr').innerHTML = score_text;
+            var stone_text = "Камни: " + stone;
+            document.getElementById('stn').innerHTML = stone_text;
         }
     
         //Красим змею в зеленый
