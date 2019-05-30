@@ -22,7 +22,7 @@ $(document).ready(function(){
         create_food(); //Еда :)
         //теперь выведем очки
         score = 0;
-
+        stone = localStorage.getItem('stones');
         // Тепер заставим двигатся змейку используя таймер который будет вызывать функцию рисующую змейку
         //каждые 60ms
         var select_speed = document.getElementById("speed_shake");
@@ -78,6 +78,7 @@ $(document).ready(function(){
             if (nx == -1 || nx == w / cw || ny == -1 || ny == h / cw || check_collision(nx, ny, snake_array)) {
                 //alert("Game Over!"); // сообщение о проиграше
                 //restart игры
+                localStorage.setItem('stones', stone+score);
                 init();
                 return;
             }
