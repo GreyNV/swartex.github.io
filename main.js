@@ -8,6 +8,7 @@ $(document).ready(function(){
     var cw = 10;
     var d;
     var food;
+    var bigFood
     var score;
     var stone = 0; //New variable to store new currency
     /* флаг состояния игры  */
@@ -19,7 +20,7 @@ $(document).ready(function(){
     {
         d = "right"; // направление
         create_snake();
-        create_food(); //Еда :)
+        create_food(food); //Еда :)
         //теперь выведем очки
         score = 0;
         stone = parseInt(localStorage.getItem('stones')) || 0;
@@ -49,6 +50,10 @@ $(document).ready(function(){
     function create_food()
     {
         food = {
+            x: Math.round(Math.random()*(w-cw)/cw),
+            y: Math.round(Math.random()*(h-cw)/cw),
+        };
+        bigFood = {
             x: Math.round(Math.random()*(w-cw)/cw),
             y: Math.round(Math.random()*(h-cw)/cw),
         };
@@ -85,11 +90,18 @@ $(document).ready(function(){
 
             //Пишем код для прийома пищи змейкой :)
 
-            if (nx == food.x && ny == food.y) {
+            if (nx == food.x && ny == food.y || nx == bigFood.x && ny == bigFood.y) {
                 var tail = {x: nx, y: ny};
                 score++;
+
                 //Создаем новый кусочек
-                create_food();
+                create_food(food);
+                if (score % 10 == 0) {
+                    create_food(bigFood);
+                    paint_cell(bigFood.x, bigFood.y);
+
+
+                }
             }
             else {
                 var tail = snake_array.pop(); //pops out the last cell
