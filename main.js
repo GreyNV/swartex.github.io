@@ -22,7 +22,7 @@ $(document).ready(function(){
         create_food(); //Еда :)
         //теперь выведем очки
         score = 0;
-        stone = localStorage.getItem('stones');
+        stone = parseInt(localStorage.getItem('stones')) || 0;
         // Тепер заставим двигатся змейку используя таймер который будет вызывать функцию рисующую змейку
         //каждые 60ms
         var select_speed = document.getElementById("speed_shake");
